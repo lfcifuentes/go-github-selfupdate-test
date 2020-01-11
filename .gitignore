@@ -1,2 +1,5 @@
 .idea
 *.exe
+*.zip
+*.old
+*.env

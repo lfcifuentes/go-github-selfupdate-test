@@ -13,23 +13,6 @@ import (
 
 const version = "1.0.1"
 
-func selfUpdate(slug string) error {
-	selfupdate.EnableLog()
-
-	previous := semver.MustParse(version)
-	latest, err := selfupdate.UpdateSelf(previous, slug)
-	if err != nil {
-		return err
-	}
-
-	if previous.Equals(latest.Version) {
-		fmt.Println("Current binary is the latest version", version)
-	} else {
-		fmt.Println("Update successfully done to version", latest.Version)
-		fmt.Println("Release note:\n", latest.ReleaseNotes)
-	}
-	return nil
-}
 
 func usage() {
 	_, _ = fmt.Fprintln(os.Stderr, "Usage: selfupdate-example [flags]\n")
@@ -81,14 +64,13 @@ func main(){
 	flag.Usage = usage
 	flag.Parse()
 
+	_ = os.Setenv("GITHUB_TOKEN","")
+
 	if *ver {
 		fmt.Println(version)
 		os.Exit(0)
 	}
-
+	selfupdate.EnableLog()
 	confirmAndSelfUpdate(*slug)
 	os.Exit(0)
-
-
-	//usage()
 }
