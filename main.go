@@ -11,7 +11,7 @@ import (
 	"strings"
 )
 
-const version = "1.2.3"
+const version = "1.0.1"
 
 func selfUpdate(slug string) error {
 	selfupdate.EnableLog()
@@ -76,7 +76,7 @@ func confirmAndSelfUpdate(slug string) {
 }
 func main(){
 	ver := flag.Bool("version", false, "Show version")
-	slug := flag.String("slug", "rhysd/go-github-selfupdate", "Repository of this command")
+	slug := flag.String("slug", "luisfercho/go-github-selfupdate-test", "Repository of this command")
 
 	flag.Usage = usage
 	flag.Parse()
